@@ -3,17 +3,19 @@
 #
 #   Ensure the SQLite 3 gem is defined in your Gemfile
 #   gem 'sqlite3'
-#
+# #
 default: &default
   adapter: postgresql
-  encoding: unicode
-
-  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  encoding: unicode 
+  pool: 5
   timeout: 5000
 
 development:
   <<: *default
-  database: injection_dependent_db
+  # database: ID_DB
+  url: postgres://uogcvadu:NhweUDV0-cCSp5Cbsy29T5N-h0r1H-T_@dumbo.db.elephantsql.com:5432/uogcvadu
+  username: uogcvadu
+  password: <%= ENV['PASSWORD'] %>
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
@@ -21,10 +23,12 @@ development:
 test:
   <<: *default
   database: test_injection_dependent_db
+  host: localhost
 
 production:
   <<: *default
-  database: injection_dependent_db
+  # database: ID_DB
+  url: postgres://uogcvadu:NhweUDV0-cCSp5Cbsy29T5N-h0r1H-T_@dumbo.db.elephantsql.com:5432/uogcvadu
   username: uogcvadu
-  password: <%= ENV['INJECTION_DEPENDENT_DATABASE_PASSWORD'] %>
-Bundler
+  password: <%= ENV['PASSWORD'] %>
+# Bundler
